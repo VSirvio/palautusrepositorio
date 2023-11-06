@@ -1,4 +1,5 @@
 import unittest
+from statistics_service import SortBy
 from statistics_service import StatisticsService
 from player import Player
 
@@ -28,5 +29,11 @@ class TestStatisticsService(unittest.TestCase):
     def test_list_all_players_in_team(self):
         self.assertEqual(self.stats.team("PIT")[0].name, "Lemieux")
 
-    def test_list_top_players(self):
+    def test_list_top_players_by_points(self):
         self.assertEqual(self.stats.top(4)[2].name, "Yzerman")
+
+    def test_list_top_players_by_goals(self):
+        self.assertEqual(self.stats.top(1, SortBy.GOALS)[0].name, "Lemieux")
+
+    def test_list_top_players_by_assists(self):
+        self.assertEqual(self.stats.top(2, SortBy.ASSISTS)[1].name, "Yzerman")
