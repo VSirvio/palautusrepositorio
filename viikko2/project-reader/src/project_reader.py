@@ -13,8 +13,9 @@ class ProjectReader:
 
         parsed_data = toml.loads(content)
         header = parsed_data["tool"]["poetry"]
-        dependencies = parsed_data["tool"]["poetry"]["dependencies"]
-        dev_dependencies = parsed_data["tool"]["poetry"]["group"]["dev"]["dependencies"]
+        authors = header["authors"]
+        deps = header["dependencies"]
+        dev_deps = header["group"]["dev"]["dependencies"]
 
         # deserialisoi TOML-formaatissa oleva merkkijono ja muodosta Project-olio sen tietojen perusteella
-        return Project(header["name"], header["description"], dependencies, dev_dependencies)
+        return Project(header["name"], header["description"], header["license"], authors,  deps, dev_deps)
