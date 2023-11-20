@@ -30,7 +30,39 @@ Register With Nonmatching Password And Password Confirmation
     Submit Credentials
     Registration Should Fail With Message  Passwords do not match
 
+Login After Successful Registration
+    Set Username  ueworhuewb
+    Set Password  euw5ukeffsldifl
+    Submit Credentials
+    Logout
+    Set Username  ueworhuewb
+    Input Password  password  euw5ukeffsldifl
+    Click Button  Login
+    Login Should Succeed
+
+Login After Failed Registration
+    Set Username  nu
+    Set Password  sfehu4ncuew
+    Submit Credentials
+    Click Link  Login
+    Set Username  nu
+    Input Password  password  sfehu4ncuew
+    Click Button  Login
+    Login Should Fail With Message  Invalid username or password
+
 *** Keywords ***
+Logout
+    Click Link  Continue to main page
+    Click Button  Logout
+
+Login Should Succeed
+    Main Page Should Be Open
+
+Login Should Fail With Message
+    [Arguments]  ${message}
+    Login Page Should Be Open
+    Page Should Contain  ${message}
+
 Submit Credentials
     Click Button  Register
 
